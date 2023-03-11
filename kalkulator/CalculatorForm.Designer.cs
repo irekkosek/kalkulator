@@ -59,7 +59,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.digitButton_Click);
+            this.button1.Click += new System.EventHandler(this.getClickedButton);
             // 
             // button2
             // 
@@ -149,7 +149,7 @@
             this.buttonBackspace.TabIndex = 11;
             this.buttonBackspace.Text = "⌫";
             this.buttonBackspace.UseVisualStyleBackColor = true;
-            this.buttonBackspace.Click += new System.EventHandler(this.digitButton_Click);
+            this.buttonBackspace.Click += new System.EventHandler(this.backspaceButton_Click);
             // 
             // buttonDelete
             // 
@@ -159,6 +159,7 @@
             this.buttonDelete.TabIndex = 10;
             this.buttonDelete.Text = "C";
             this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // button12
             // 
@@ -236,6 +237,7 @@
             this.buttonComma.TabIndex = 20;
             this.buttonComma.Text = ",";
             this.buttonComma.UseVisualStyleBackColor = true;
+            this.buttonComma.Click += new System.EventHandler(this.digitButton_Click);
             // 
             // button0
             // 
@@ -245,6 +247,7 @@
             this.button0.TabIndex = 19;
             this.button0.Text = "0";
             this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.digitButton_Click);
             // 
             // buttonPlusMinus
             // 
@@ -254,6 +257,7 @@
             this.buttonPlusMinus.TabIndex = 18;
             this.buttonPlusMinus.Text = "⁺/₋";
             this.buttonPlusMinus.UseVisualStyleBackColor = true;
+            this.buttonPlusMinus.Click += new System.EventHandler(this.plusMinusButton_Click);
             // 
             // CalculatorForm
             // 
