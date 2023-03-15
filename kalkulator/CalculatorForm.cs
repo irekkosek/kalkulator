@@ -39,6 +39,7 @@
                 updateCalcuationRichTextBox(previousCalculation, ongoingCalculation);
             }
 
+
             if (Regex.Match(button, "^[0-9,]$").Success)
             {
                 refreshCalcuationRichTextBox();
@@ -117,7 +118,7 @@
             string op = ((Button)sender).Text;
             if (Regex.Match(ongoingCalculation, "^[0-9.]+$").Success)
             {
-                previousCalculation = ongoingCalculation + " " + op + " ";
+                previousCalculation += ongoingCalculation + " " + op + " ";
 
                 //ongoingCalculation = "";
             }
@@ -132,10 +133,10 @@
                 dividedByZero();
                 return;
             }
-            if (Regex.Match(expression, "^[0-9.]+ ([-+x÷] [0-9.]+)+$").Success)
+            if (Regex.Match(expression, "^[0-9,.]+( [-+x÷] [0-9,.]+)+$").Success)
             {
-                ongoingCalculation = Evaluate(expression);
                 previousCalculation += ongoingCalculation + " " + "=" + " ";
+                ongoingCalculation = Evaluate(expression);
             }
         }
 
@@ -167,7 +168,7 @@
 
 
             object result_obj = "error";
-            if (Regex.Match(expression, "^([0-9.]+ [-+/*] [0-9.]+)+$").Success)
+            if (Regex.Match(expression, "^[0-9.]+( [-+*/] [0-9.]+)+$").Success)
             {
                 DataTable table = new DataTable();
                 result_obj = table.Compute(expression, "");
