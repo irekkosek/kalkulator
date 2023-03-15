@@ -21,6 +21,13 @@
             calculationRichTextBox.AppendText(previousCalculation + "\n");
             calculationRichTextBox.AppendText(ongoingCalculation);
         }
+        private void refreshCalcuationRichTextBox()
+        {
+            calculationRichTextBox.Clear();
+            calculationRichTextBox.SelectionAlignment = HorizontalAlignment.Right;
+            calculationRichTextBox.AppendText(previousCalculation + "\n");
+            calculationRichTextBox.AppendText("");
+        }
 
         private void getClickedButton(object sender, EventArgs e)
         {
@@ -34,11 +41,13 @@
 
             if (Regex.Match(button, "^[0-9,]$").Success)
             {
+                refreshCalcuationRichTextBox();
                 digitButton_Click(sender, e);
             }
             if (Regex.Match(button, "^[-+x÷]$").Success)
             {
                 operatorButton_Click(sender, e);
+                ongoingCalculation = "";
             }
             if (Regex.Match(button, "^[=]$").Success)
             {
@@ -91,6 +100,7 @@
 
         private void clearButton_Click(object sender, EventArgs e)
         {
+            previousCalculation = "";
             ongoingCalculation = "";
         }
 
