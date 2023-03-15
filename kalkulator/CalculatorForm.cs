@@ -46,6 +46,7 @@
                 if (Regex.Match(button, "^=$").Success)
                 {
                     var match = Regex.Match(previousCalculation, "([-+x÷] [0-9,.]) $");
+                    previousCalculation = ongoingCalculation + " ";
                     previousCalculation += match.Groups[1];
                     ongoingCalculation = "";
                 }
