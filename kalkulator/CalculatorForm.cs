@@ -40,6 +40,22 @@
             }
 
 
+            if (Regex.Match(previousCalculation, "= $").Success)
+            {
+                previousCalculation = previousCalculation.Replace("= ", "");
+                if (Regex.Match(button, "^=$").Success)
+                {
+                    var match = Regex.Match(previousCalculation, "([-+x÷] [0-9,.]) $");
+                    previousCalculation += match.Groups[1];
+                    ongoingCalculation = "";
+                }
+                if (Regex.Match(button, "^[-+x÷]$").Success)
+                {
+                    previousCalculation = "";
+                }
+
+            }
+
             if (Regex.Match(button, "^[0-9,]$").Success)
             {
                 refreshCalcuationRichTextBox();
