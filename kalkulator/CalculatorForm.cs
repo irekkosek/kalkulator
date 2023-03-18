@@ -156,7 +156,7 @@
         {
             //previousCalculation = Evaluate(previousCalculation or ongoing ?);
             string expression=previousCalculation + ongoingCalculation;
-            if (Regex.Match(expression, "÷ 0 ").Success)
+            if (Regex.Match(expression, "÷ 0$").Success)
             {
                 dividedByZero();
                 return;
