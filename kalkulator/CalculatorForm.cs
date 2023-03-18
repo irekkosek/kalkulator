@@ -59,6 +59,10 @@
 
             if (Regex.Match(button, "^[0-9,]$").Success)
             {
+                if (Regex.Match(ongoingCalculation, ",").Success && Regex.Match(button, "^[,]$").Success)
+                {
+                    return;
+                }
                 refreshCalcuationRichTextBox();
                 digitButton_Click(sender, e);
             }
