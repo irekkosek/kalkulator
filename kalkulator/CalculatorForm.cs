@@ -147,7 +147,6 @@
             {
                 previousCalculation = previousCalculation.Substring(0, previousCalculation.Length - 3);
                 previousCalculation += ongoingCalculation + " " + op + " ";
-                return;
             }
 
         }
