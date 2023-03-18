@@ -167,7 +167,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(98, 45);
             this.button12.TabIndex = 9;
-            this.button12.Text = "button12";
             this.button12.UseVisualStyleBackColor = true;
             // 
             // buttonDivide

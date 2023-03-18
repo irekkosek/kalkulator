@@ -45,7 +45,7 @@
                 previousCalculation = previousCalculation.Replace("= ", "");
                 if (Regex.Match(button, "^=$").Success)
                 {
-                    var match = Regex.Match(previousCalculation, "([-+x÷] [0-9,.]) $");
+                    var match = Regex.Match(previousCalculation, "([-+x÷] [-0-9,.]) $");
                     previousCalculation = ongoingCalculation + " ";
                     previousCalculation += match.Groups[1];
                     ongoingCalculation = "";
@@ -92,6 +92,11 @@
 
         private void digitButton_Click(object sender, EventArgs e)
         {
+            string digit = ((Button)sender).Text;
+            if (Regex.Match(ongoingCalculation, "^[-]+$").Success && digit == "0") //match if user wants to concatenate "0" to a "-"
+            {
+                return;
+            }
             if (Regex.Match(previousCalculation, " [-+x÷] $").Success && !Regex.Match(ongoingCalculation, ".+").Success)
             {
                 ongoingCalculation = "";
@@ -103,14 +108,15 @@
                 ongoingCalculation = "";
                 updateCalcuationRichTextBox(previousCalculation, ongoingCalculation);
             }
-            string digit = ((Button)sender).Text;
             ongoingCalculation += digit;
-            
-
         }
 
         private void plusMinusButton_Click(object sender, EventArgs e)
         {
+            if (Regex.Match(ongoingCalculation, "^[0]+$").Success) //if contains only zero from start to end
+            {
+                return;
+            }
             if (ongoingCalculation.StartsWith("-")){
                 ongoingCalculation = ongoingCalculation.Substring(1);
             }
@@ -137,11 +143,12 @@
         private void operatorButton_Click(object sender, EventArgs e)
         {
             string op = ((Button)sender).Text;
-            if (Regex.Match(ongoingCalculation, "^[0-9.,]+$").Success)
+            if (Regex.Match(ongoingCalculation, "^[-0-9.,]+$").Success)
             {
                 previousCalculation += ongoingCalculation + " " + op + " ";
 
                 //ongoingCalculation = "";
+
             }
             else if (Regex.Match(previousCalculation, "[-+x÷] $").Success) //if op present
             {
@@ -155,12 +162,12 @@
         {
             //previousCalculation = Evaluate(previousCalculation or ongoing ?);
             string expression=previousCalculation + ongoingCalculation;
-            if (Regex.Match(expression, "÷ 0$").Success)
+            if (Regex.Match(expression, "÷ [0]+$").Success)
             {
                 dividedByZero();
                 return;
             }
-            if (Regex.Match(expression, "^[0-9,.]+( [-+x÷] [0-9,.]+)+$").Success)
+            if (Regex.Match(expression, "^[-0-9,.]+( [-+x÷] [-0-9,.]+)+$").Success)
             {
                 previousCalculation += ongoingCalculation + " " + "=" + " ";
                 ongoingCalculation = Evaluate(expression);
@@ -195,7 +202,7 @@
 
 
             object result_obj = "error";
-            if (Regex.Match(expression, "^[0-9.]+( [-+*/] [0-9.]+)+$").Success)
+            if (Regex.Match(expression, "^[-0-9.]+( [-+*/] [-0-9.]+)+$").Success)
             {
                 DataTable table = new DataTable();
                 result_obj = table.Compute(expression, "");
@@ -212,6 +219,5 @@
 
             return result; 
         }
-
     }
 }
