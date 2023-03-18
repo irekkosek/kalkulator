@@ -137,12 +137,19 @@
         private void operatorButton_Click(object sender, EventArgs e)
         {
             string op = ((Button)sender).Text;
-            if (Regex.Match(ongoingCalculation, "^[0-9.]+$").Success)
+            if (Regex.Match(ongoingCalculation, "^[0-9.,]+$").Success)
             {
                 previousCalculation += ongoingCalculation + " " + op + " ";
 
                 //ongoingCalculation = "";
             }
+            else if (Regex.Match(previousCalculation, "[-+x÷] $").Success) //if op present
+            {
+                previousCalculation = previousCalculation.Substring(0, previousCalculation.Length - 3);
+                previousCalculation += ongoingCalculation + " " + op + " ";
+                return;
+            }
+
         }
 
         private void equalsButton_Click(object sender, EventArgs e)
