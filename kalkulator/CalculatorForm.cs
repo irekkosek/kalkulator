@@ -67,6 +67,10 @@
 
             if (Regex.Match(button, "^[0-9,]$").Success)
             {
+                if (ongoingCalculation.Length > 32)
+                {
+                    return;
+                }
                 if (Regex.Match(ongoingCalculation, ",").Success && Regex.Match(button, "^[,]$").Success)
                 {
                     return;
@@ -76,6 +80,10 @@
             }
             if (Regex.Match(button, "^[-+x÷]$").Success)
             {
+                if (ongoingCalculation.Length > 32)
+                {
+                    return;
+                }
                 operatorButton_Click(sender, e);
                 ongoingCalculation = "";
             }
