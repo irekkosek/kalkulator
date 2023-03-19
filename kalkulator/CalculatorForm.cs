@@ -62,6 +62,12 @@
                 if (Regex.Match(button, "^⁺/₋$").Success)
                 {
                     previousCalculation += "= ";    //re add "= " when changing signs
+
+                }
+                if (Regex.Match(button, "^[0-9,]$").Success)
+                {
+                    previousCalculation = "";
+                    ongoingCalculation = "";
                 }
             }
 
