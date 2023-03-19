@@ -54,7 +54,15 @@
                 {
                     previousCalculation = "";
                 }
-
+                if(Regex.Match(button, "^[⌫]$").Success){
+                    previousCalculation = "";       //clear out history if "= " wass applied previously         
+                    updateCalcuationRichTextBox(previousCalculation, ongoingCalculation);
+                    return;
+                }
+                if (Regex.Match(button, "^⁺/₋$").Success)
+                {
+                    previousCalculation += "= ";    //re add "= " when changing signs
+                }
             }
 
             if (Regex.Match(button, "^[0-9,]$").Success)
